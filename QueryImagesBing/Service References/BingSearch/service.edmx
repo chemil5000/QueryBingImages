@@ -1,0 +1,204 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:dr="http://schemas.microsoft.com/dallas/2010/04">
+  <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="1.0">
+    <Schema xmlns="http://schemas.microsoft.com/ado/2009/08/edm" Namespace="Bing" Alias="Bing" dr:AllowRawFormat="false">
+      <EntityContainer Name="BingSearchContainer">
+        <EntitySet Name="ExpandableSearchResultSet" EntityType="Bing.ExpandableSearchResult" />
+        <FunctionImport Name="Composite" EntitySet="ExpandableSearchResultSet" ReturnType="Collection(Bing.ExpandableSearchResult)" dr:MaxPageSize="50" dr:QueryResourceCost="1">
+          <Parameter Name="Sources" Nullable="false" Mode="In" Type="Edm.String" dr:Description="Bing search sources" dr:SampleValues="web+image+video+news+spell" />
+          <Parameter Name="Query" Nullable="false" Mode="In" Type="Edm.String" dr:Description="Bing search query" dr:SampleValues="xbox" />
+          <Parameter Name="Options" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Specifies options for this request for all Sources. Valid values are: DisableLocationDetection, EnableHighlighting." dr:SampleValues="EnableHighlighting" />
+          <Parameter Name="WebSearchOptions" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Specify options for a request to the Web SourceType. Valid values are: DisableHostCollapsing, DisableQueryAlterations." dr:SampleValues="DisableQueryAlterations" />
+          <Parameter Name="Market" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="ar-XA|bg-BG|cs-CZ|da-DK|de-AT|de-CH|de-DE|el-GR|en-AU|en-CA|en-GB|en-ID|en-IE|en-IN|en-MY|en-NZ|en-PH|en-SG|en-US|en-XA|en-ZA|es-AR|es-CL|es-ES|es-MX|es-US|es-XL|et-EE|fi-FI|fr-BE|fr-CA|fr-CH|fr-FR|he-IL|hr-HR|hu-HU|it-IT|ja-JP|ko-KR|lt-LT|lv-LV|nb-NO|nl-BE|nl-NL|pl-PL|pt-BR|pt-PT|ro-RO|ru-RU|sk-SK|sl-SI|sv-SE|th-TH|tr-TR|uk-UA|zh-CN|zh-HK|zh-TW" dr:Description="Market. Note: Not all Sources support all markets." dr:SampleValues="en-US" />
+          <Parameter Name="Adult" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Off|Moderate|Strict" dr:Description="Adult setting is used for filtering sexually explicit content" dr:SampleValues="Moderate" />
+          <Parameter Name="Latitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Latitude" dr:SampleValues="47.603450" />
+          <Parameter Name="Longitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Longitude" dr:SampleValues="-122.329696" />
+          <Parameter Name="WebFileType" Nullable="true" Mode="In" Type="Edm.String" dr:Description="File extensions to return" dr:Enum="DOC|DWF|FEED|HTM|HTML|PDF|PPT|RTF|TEXT|TXT|XLS" dr:SampleValues="XLS" />
+          <Parameter Name="ImageFilters" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Array of strings that filter the response the API sends based on size, aspect, color, style, face or any combination thereof. Valid values are: Size:Small, Size:Medium, Size:Large, Size:Width:[Width], Size:Height:[Height], Aspect:Square, Aspect:Wide, Aspect:Tall, Color:Color, Color:Monochrome, Style:Photo, Style:Graphics, Face:Face, Face:Portrait, Face:Other." dr:SampleValues="Size:Small+Aspect:Square" />
+          <Parameter Name="VideoFilters" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Array of strings that filter the response the API sends based on size, aspect, color, style, face or any combination thereof. Valid values are: Duration:Short, Duration:Medium, Duration:Long, Aspect:Standard, Aspect:Widescreen, Resolution:Low, Resolution:Medium, Resolution:High." dr:SampleValues="Duration:Short+Resolution:High" />
+          <Parameter Name="VideoSortBy" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Date|Relevance" dr:Description="The sort order of results returned" dr:SampleValues="Date" />
+          <Parameter Name="NewsLocationOverride" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="US.AL|US.AK|US.AZ|US.AR|US.CA|US.CO|US.CT|US.DE|US.DC|US.FL|US.GA|US.HI|US.ID|US.IL|US.IN|US.IA|US.KS|US.KY|US.LA|US.ME|US.MD|US.MA|US.MI|US.MN|US.MS|US.MO|US.MT|US.NE|US.NV|US.NH|US.NJ|US.NM|US.NY|US.NC|US.ND|US.OH|US.OK|US.OR|US.PA|US.RI|US.SC|US.SD|US.TN|US.TX|US.UT|US.VT|US.VA|US.WA|US.WV|US.WI|US.WY" dr:Description="Overrides Bing location detection. This parameter is only applicable in en-US market." dr:SampleValues="US.WA" />
+          <Parameter Name="NewsCategory" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="rt_Business|rt_Entertainment|rt_Health|rt_Politics|rt_Sports|rt_US|rt_World|rt_ScienceAndTechnology" dr:Description="The category of news for which to provide results" dr:SampleValues="rt_Business" />
+          <Parameter Name="NewsSortBy" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Date|Relevance" dr:Description="The sort order of results returned" dr:SampleValues="Date" />
+        </FunctionImport>
+        <EntitySet Name="WebResultSet" EntityType="Bing.WebResult" />
+        <FunctionImport Name="Web" EntitySet="WebResultSet" ReturnType="Collection(Bing.WebResult)" dr:MaxPageSize="50" dr:QueryResourceCost="1">
+          <Parameter Name="Query" Nullable="false" Mode="In" Type="Edm.String" dr:Description="Bing search query" dr:SampleValues="xbox" />
+          <Parameter Name="Options" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Specifies options for this request for all Sources. Valid values are: DisableLocationDetection, EnableHighlighting." dr:SampleValues="EnableHighlighting" />
+          <Parameter Name="WebSearchOptions" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Specify options for a request to the Web SourceType. Valid values are: DisableHostCollapsing, DisableQueryAlterations." dr:SampleValues="DisableQueryAlterations" />
+          <Parameter Name="Market" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="ar-XA|bg-BG|cs-CZ|da-DK|de-AT|de-CH|de-DE|el-GR|en-AU|en-CA|en-GB|en-ID|en-IE|en-IN|en-MY|en-NZ|en-PH|en-SG|en-US|en-XA|en-ZA|es-AR|es-CL|es-ES|es-MX|es-US|es-XL|et-EE|fi-FI|fr-BE|fr-CA|fr-CH|fr-FR|he-IL|hr-HR|hu-HU|it-IT|ja-JP|ko-KR|lt-LT|lv-LV|nb-NO|nl-BE|nl-NL|pl-PL|pt-BR|pt-PT|ro-RO|ru-RU|sk-SK|sl-SI|sv-SE|th-TH|tr-TR|uk-UA|zh-CN|zh-HK|zh-TW" dr:Description="Market. Note: Not all Sources support all markets." dr:SampleValues="en-US" />
+          <Parameter Name="Adult" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Off|Moderate|Strict" dr:Description="Adult setting is used for filtering sexually explicit content" dr:SampleValues="Moderate" />
+          <Parameter Name="Latitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Latitude" dr:SampleValues="47.603450" />
+          <Parameter Name="Longitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Longitude" dr:SampleValues="-122.329696" />
+          <Parameter Name="WebFileType" Nullable="true" Mode="In" Type="Edm.String" dr:Description="File extensions to return" dr:Enum="DOC|DWF|FEED|HTM|HTML|PDF|PPT|RTF|TEXT|TXT|XLS" dr:SampleValues="XLS" />
+        </FunctionImport>
+        <EntitySet Name="ImageResultSet" EntityType="Bing.ImageResult" />
+        <FunctionImport Name="Image" EntitySet="ImageResultSet" ReturnType="Collection(Bing.ImageResult)" dr:MaxPageSize="50" dr:QueryResourceCost="1">
+          <Parameter Name="Query" Nullable="false" Mode="In" Type="Edm.String" dr:Description="Bing search query" dr:SampleValues="xbox" />
+          <Parameter Name="Options" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Specifies options for this request for all Sources. Valid values are: DisableLocationDetection, EnableHighlighting." dr:SampleValues="EnableHighlighting" />
+          <Parameter Name="Market" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="ar-XA|bg-BG|cs-CZ|da-DK|de-AT|de-CH|de-DE|el-GR|en-AU|en-CA|en-GB|en-ID|en-IE|en-IN|en-MY|en-NZ|en-PH|en-SG|en-US|en-XA|en-ZA|es-AR|es-CL|es-ES|es-MX|es-US|es-XL|et-EE|fi-FI|fr-BE|fr-CA|fr-CH|fr-FR|he-IL|hr-HR|hu-HU|it-IT|ja-JP|ko-KR|lt-LT|lv-LV|nb-NO|nl-BE|nl-NL|pl-PL|pt-BR|pt-PT|ro-RO|ru-RU|sk-SK|sl-SI|sv-SE|th-TH|tr-TR|uk-UA|zh-CN|zh-HK|zh-TW" dr:Description="Market. Note: Not all Sources support all markets." dr:SampleValues="en-US" />
+          <Parameter Name="Adult" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Off|Moderate|Strict" dr:Description="Adult setting is used for filtering sexually explicit content" dr:SampleValues="Moderate" />
+          <Parameter Name="Latitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Latitude" dr:SampleValues="47.603450" />
+          <Parameter Name="Longitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Longitude" dr:SampleValues="-122.329696" />
+          <Parameter Name="ImageFilters" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Array of strings that filter the response the API sends based on size, aspect, color, style, face or any combination thereof. Valid values are: Size:Small, Size:Medium, Size:Large, Size:Width:[Width], Size:Height:[Height], Aspect:Square, Aspect:Wide, Aspect:Tall, Color:Color, Color:Monochrome, Style:Photo, Style:Graphics, Face:Face, Face:Portrait, Face:Other." dr:SampleValues="Size:Small+Aspect:Square" />
+        </FunctionImport>
+        <EntitySet Name="VideoResultSet" EntityType="Bing.VideoResult" />
+        <FunctionImport Name="Video" EntitySet="VideoResultSet" ReturnType="Collection(Bing.VideoResult)" dr:MaxPageSize="50" dr:QueryResourceCost="1">
+          <Parameter Name="Query" Nullable="false" Mode="In" Type="Edm.String" dr:Description="Bing search query" dr:SampleValues="xbox" />
+          <Parameter Name="Options" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Specifies options for this request for all Sources. Valid values are: DisableLocationDetection, EnableHighlighting." dr:SampleValues="EnableHighlighting" />
+          <Parameter Name="Market" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="ar-XA|bg-BG|cs-CZ|da-DK|de-AT|de-CH|de-DE|el-GR|en-AU|en-CA|en-GB|en-ID|en-IE|en-IN|en-MY|en-NZ|en-PH|en-SG|en-US|en-XA|en-ZA|es-AR|es-CL|es-ES|es-MX|es-US|es-XL|et-EE|fi-FI|fr-BE|fr-CA|fr-CH|fr-FR|he-IL|hr-HR|hu-HU|it-IT|ja-JP|ko-KR|lt-LT|lv-LV|nb-NO|nl-BE|nl-NL|pl-PL|pt-BR|pt-PT|ro-RO|ru-RU|sk-SK|sl-SI|sv-SE|th-TH|tr-TR|uk-UA|zh-CN|zh-HK|zh-TW" dr:Description="Market. Note: Not all Sources support all markets." dr:SampleValues="en-US" />
+          <Parameter Name="Adult" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Off|Moderate|Strict" dr:Description="Adult setting is used for filtering sexually explicit content" dr:SampleValues="Moderate" />
+          <Parameter Name="Latitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Latitude" dr:SampleValues="47.603450" />
+          <Parameter Name="Longitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Longitude" dr:SampleValues="-122.329696" />
+          <Parameter Name="VideoFilters" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Array of strings that filter the response the API sends based on size, aspect, color, style, face or any combination thereof. Valid values are: Duration:Short, Duration:Medium, Duration:Long, Aspect:Standard, Aspect:Widescreen, Resolution:Low, Resolution:Medium, Resolution:High." dr:SampleValues="Duration:Short+Resolution:High" />
+          <Parameter Name="VideoSortBy" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Date|Relevance" dr:Description="The sort order of results returned" dr:SampleValues="Date" />
+        </FunctionImport>
+        <EntitySet Name="NewsResultSet" EntityType="Bing.NewsResult" />
+        <FunctionImport Name="News" EntitySet="NewsResultSet" ReturnType="Collection(Bing.NewsResult)" dr:MaxPageSize="15" dr:QueryResourceCost="1">
+          <Parameter Name="Query" Nullable="false" Mode="In" Type="Edm.String" dr:Description="Bing search query" dr:SampleValues="xbox" />
+          <Parameter Name="Options" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Specifies options for this request for all Sources. Valid values are: DisableLocationDetection, EnableHighlighting." dr:SampleValues="EnableHighlighting" />
+          <Parameter Name="Market" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="ar-XA|bg-BG|cs-CZ|da-DK|de-AT|de-CH|de-DE|el-GR|en-AU|en-CA|en-GB|en-ID|en-IE|en-IN|en-MY|en-NZ|en-PH|en-SG|en-US|en-XA|en-ZA|es-AR|es-CL|es-ES|es-MX|es-US|es-XL|et-EE|fi-FI|fr-BE|fr-CA|fr-CH|fr-FR|he-IL|hr-HR|hu-HU|it-IT|ja-JP|ko-KR|lt-LT|lv-LV|nb-NO|nl-BE|nl-NL|pl-PL|pt-BR|pt-PT|ro-RO|ru-RU|sk-SK|sl-SI|sv-SE|th-TH|tr-TR|uk-UA|zh-CN|zh-HK|zh-TW" dr:Description="Market. Note: Not all Sources support all markets." dr:SampleValues="en-US" />
+          <Parameter Name="Adult" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Off|Moderate|Strict" dr:Description="Adult setting is used for filtering sexually explicit content" dr:SampleValues="Moderate" />
+          <Parameter Name="Latitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Latitude" dr:SampleValues="47.603450" />
+          <Parameter Name="Longitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Longitude" dr:SampleValues="-122.329696" />
+          <Parameter Name="NewsLocationOverride" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="US.AL|US.AK|US.AZ|US.AR|US.CA|US.CO|US.CT|US.DE|US.DC|US.FL|US.GA|US.HI|US.ID|US.IL|US.IN|US.IA|US.KS|US.KY|US.LA|US.ME|US.MD|US.MA|US.MI|US.MN|US.MS|US.MO|US.MT|US.NE|US.NV|US.NH|US.NJ|US.NM|US.NY|US.NC|US.ND|US.OH|US.OK|US.OR|US.PA|US.RI|US.SC|US.SD|US.TN|US.TX|US.UT|US.VT|US.VA|US.WA|US.WV|US.WI|US.WY" dr:Description="Overrides Bing location detection. This parameter is only applicable in en-US market." dr:SampleValues="US.WA" />
+          <Parameter Name="NewsCategory" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="rt_Business|rt_Entertainment|rt_Health|rt_Politics|rt_Sports|rt_US|rt_World|rt_ScienceAndTechnology" dr:Description="The category of news for which to provide results" dr:SampleValues="rt_Business" />
+          <Parameter Name="NewsSortBy" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Date|Relevance" dr:Description="The sort order of results returned" dr:SampleValues="Date" />
+        </FunctionImport>
+        <EntitySet Name="RelatedSearchResultSet" EntityType="Bing.RelatedSearchResult" />
+        <FunctionImport Name="RelatedSearch" EntitySet="RelatedSearchResultSet" ReturnType="Collection(Bing.RelatedSearchResult)" dr:MaxPageSize="50" dr:QueryResourceCost="1">
+          <Parameter Name="Query" Nullable="false" Mode="In" Type="Edm.String" dr:Description="Bing search query" dr:SampleValues="xbox" />
+          <Parameter Name="Options" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Specifies options for this request for all Sources. Valid values are: DisableLocationDetection, EnableHighlighting." dr:SampleValues="EnableHighlighting" />
+          <Parameter Name="Market" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="ar-XA|bg-BG|cs-CZ|da-DK|de-AT|de-CH|de-DE|el-GR|en-AU|en-CA|en-GB|en-ID|en-IE|en-IN|en-MY|en-NZ|en-PH|en-SG|en-US|en-XA|en-ZA|es-AR|es-CL|es-ES|es-MX|es-US|es-XL|et-EE|fi-FI|fr-BE|fr-CA|fr-CH|fr-FR|he-IL|hr-HR|hu-HU|it-IT|ja-JP|ko-KR|lt-LT|lv-LV|nb-NO|nl-BE|nl-NL|pl-PL|pt-BR|pt-PT|ro-RO|ru-RU|sk-SK|sl-SI|sv-SE|th-TH|tr-TR|uk-UA|zh-CN|zh-HK|zh-TW" dr:Description="Market. Note: Not all Sources support all markets." dr:SampleValues="en-US" />
+          <Parameter Name="Adult" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Off|Moderate|Strict" dr:Description="Adult setting is used for filtering sexually explicit content" dr:SampleValues="Moderate" />
+          <Parameter Name="Latitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Latitude" dr:SampleValues="47.603450" />
+          <Parameter Name="Longitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Longitude" dr:SampleValues="-122.329696" />
+        </FunctionImport>
+        <EntitySet Name="SpellResultSet" EntityType="Bing.SpellResult" />
+        <FunctionImport Name="SpellingSuggestions" EntitySet="SpellResultSet" ReturnType="Collection(Bing.SpellResult)" dr:MaxPageSize="50" dr:QueryResourceCost="1">
+          <Parameter Name="Query" Nullable="false" Mode="In" Type="Edm.String" dr:Description="Bing search query" dr:SampleValues="xblox" />
+          <Parameter Name="Options" Nullable="true" Mode="In" Type="Edm.String" dr:Description="Specifies options for this request for all Sources. Valid values are: DisableLocationDetection, EnableHighlighting." dr:SampleValues="EnableHighlighting" />
+          <Parameter Name="Market" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="ar-XA|bg-BG|cs-CZ|da-DK|de-AT|de-CH|de-DE|el-GR|en-AU|en-CA|en-GB|en-ID|en-IE|en-IN|en-MY|en-NZ|en-PH|en-SG|en-US|en-XA|en-ZA|es-AR|es-CL|es-ES|es-MX|es-US|es-XL|et-EE|fi-FI|fr-BE|fr-CA|fr-CH|fr-FR|he-IL|hr-HR|hu-HU|it-IT|ja-JP|ko-KR|lt-LT|lv-LV|nb-NO|nl-BE|nl-NL|pl-PL|pt-BR|pt-PT|ro-RO|ru-RU|sk-SK|sl-SI|sv-SE|th-TH|tr-TR|uk-UA|zh-CN|zh-HK|zh-TW" dr:Description="Market. Note: Not all Sources support all markets." dr:SampleValues="en-US" />
+          <Parameter Name="Adult" Nullable="true" Mode="In" Type="Edm.String" dr:Enum="Off|Moderate|Strict" dr:Description="Adult setting is used for filtering sexually explicit content" dr:SampleValues="Moderate" />
+          <Parameter Name="Latitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Latitude" dr:SampleValues="47.603450" />
+          <Parameter Name="Longitude" Nullable="true" Mode="In" Type="Edm.Double" dr:Description="Longitude" dr:SampleValues="-122.329696" />
+        </FunctionImport>
+      </EntityContainer>
+      <EntityType Name="ExpandableSearchResult">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="WebTotal" Type="Edm.Int64" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="WebOffset" Type="Edm.Int64" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="ImageTotal" Type="Edm.Int64" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="ImageOffset" Type="Edm.Int64" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="VideoTotal" Type="Edm.Int64" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="VideoOffset" Type="Edm.Int64" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="NewsTotal" Type="Edm.Int64" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="NewsOffset" Type="Edm.Int64" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="SpellingSuggestionsTotal" Type="Edm.Int64" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="AlteredQuery" Type="Edm.String" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="AlterationOverrideQuery" Type="Edm.String" Nullable="true" dr:Queryable="false" dr:Returned="true" />
+        <NavigationProperty Name="Web" Relationship="Bing.WebResultAssociation" ToRole="WebResult_ExpandableSearchResult" FromRole="ExpandableSearchResult_WebResult" />
+        <NavigationProperty Name="Image" Relationship="Bing.ImageResultAssociation" ToRole="ImageResult_ExpandableSearchResult" FromRole="ExpandableSearchResult_ImageResult" />
+        <NavigationProperty Name="Video" Relationship="Bing.VideoResultAssociation" ToRole="VideoResult_ExpandableSearchResult" FromRole="ExpandableSearchResult_VideoResult" />
+        <NavigationProperty Name="News" Relationship="Bing.NewsResultAssociation" ToRole="NewsResult_ExpandableSearchResult" FromRole="ExpandableSearchResult_NewsResult" />
+        <NavigationProperty Name="RelatedSearch" Relationship="Bing.RelatedSearchResultAssociation" ToRole="RelatedSearchResult_ExpandableSearchResult" FromRole="ExpandableSearchResult_RelatedSearchResult" />
+        <NavigationProperty Name="SpellingSuggestions" Relationship="Bing.SpellResultAssociation" ToRole="SpellResult_ExpandableSearchResult" FromRole="ExpandableSearchResult_SpellResult" />
+      </EntityType>
+      <Association Name="WebResultAssociation">
+        <End Type="Bing.ExpandableSearchResult" Multiplicity="0..1" Role="ExpandableSearchResult_WebResult" />
+        <End Type="Bing.WebResult" Multiplicity="*" Role="WebResult_ExpandableSearchResult" />
+      </Association>
+      <Association Name="ImageResultAssociation">
+        <End Type="Bing.ExpandableSearchResult" Multiplicity="0..1" Role="ExpandableSearchResult_ImageResult" />
+        <End Type="Bing.ImageResult" Multiplicity="*" Role="ImageResult_ExpandableSearchResult" />
+      </Association>
+      <Association Name="VideoResultAssociation">
+        <End Type="Bing.ExpandableSearchResult" Multiplicity="0..1" Role="ExpandableSearchResult_VideoResult" />
+        <End Type="Bing.VideoResult" Multiplicity="*" Role="VideoResult_ExpandableSearchResult" />
+      </Association>
+      <Association Name="NewsResultAssociation">
+        <End Type="Bing.ExpandableSearchResult" Multiplicity="0..1" Role="ExpandableSearchResult_NewsResult" />
+        <End Type="Bing.NewsResult" Multiplicity="*" Role="NewsResult_ExpandableSearchResult" />
+      </Association>
+      <Association Name="RelatedSearchResultAssociation">
+        <End Type="Bing.ExpandableSearchResult" Multiplicity="0..1" Role="ExpandableSearchResult_RelatedSearchResult" />
+        <End Type="Bing.RelatedSearchResult" Multiplicity="*" Role="RelatedSearchResult_ExpandableSearchResult" />
+      </Association>
+      <Association Name="SpellResultAssociation">
+        <End Type="Bing.ExpandableSearchResult" Multiplicity="0..1" Role="ExpandableSearchResult_SpellResult" />
+        <End Type="Bing.SpellResult" Multiplicity="*" Role="SpellResult_ExpandableSearchResult" />
+      </Association>
+      <EntityType Name="WebResult">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Title" Type="Edm.String" dr:Description="The Title field contains the text specified in the HTML TITLE tag of the page." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Description" Type="Edm.String" dr:Description="The description text of the web result." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="DisplayUrl" Type="Edm.String" dr:Description="The web URL to display to the user." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Url" Type="Edm.String" dr:Description="The full URL for the web result." dr:Queryable="false" dr:Returned="true" />
+      </EntityType>
+      <EntityType Name="ImageResult">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Title" Type="Edm.String" dr:Description="The title of the image." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="MediaUrl" Type="Edm.String" dr:Description="The URL to the full-size image." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="SourceUrl" Type="Edm.String" dr:Description="The URL of the website that contains a returned image." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="DisplayUrl" Type="Edm.String" dr:Description="The URL that is displayed on the search results page." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Width" Type="Edm.Int32" dr:Description="The width of the full-size image in pixels, if available." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Height" Type="Edm.Int32" dr:Description="The height of the full-size image in pixels, if available." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="FileSize" Type="Edm.Int64" dr:Description="The size, in bytes, of the full-size image file, if available." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="ContentType" Type="Edm.String" dr:Description="The MIME type of an image, if available." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Thumbnail" Type="Bing.Thumbnail" dr:Description="The thumbnail properties of the multi-media element." dr:Queryable="false" dr:Returned="true" />
+      </EntityType>
+      <EntityType Name="VideoResult">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Title" Type="Edm.String" dr:Description="The source of the video." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="MediaUrl" Type="Edm.String" dr:Description="The URL for the original video." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="DisplayUrl" Type="Edm.String" dr:Description="The URL for this video from the Bing Video page." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="RunTime" Type="Edm.Int32" dr:Description="The playback length of the multi-media element." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Thumbnail" Type="Bing.Thumbnail" dr:Description="The thumbnail properties of the multi-media element." dr:Queryable="false" dr:Returned="true" />
+      </EntityType>
+      <EntityType Name="NewsResult">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Title" Type="Edm.String" dr:Description="The headline for this result." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Url" Type="Edm.String" dr:Description="The URL of this article." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Source" Type="Edm.String" dr:Description="The organization responsible for this article." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Description" Type="Edm.String" dr:Description="A representative sample of this result." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Date" Type="Edm.DateTime" dr:Description="The date on which this article was indexed." dr:Queryable="false" dr:Returned="true" />
+      </EntityType>
+      <EntityType Name="RelatedSearchResult">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Title" Type="Edm.String" dr:Description="The source of the video." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="BingUrl" Type="Edm.String" dr:Description="The URL for this video from the Bing Video page." dr:Queryable="false" dr:Returned="true" />
+      </EntityType>
+      <EntityType Name="SpellResult">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false" dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Value" Type="Edm.String" dr:Queryable="false" dr:Returned="true" />
+      </EntityType>
+      <ComplexType Name="Thumbnail">
+        <Property Name="MediaUrl" Type="Edm.String" dr:Description="The URL of the thumbnail." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="ContentType" Type="Edm.String" dr:Description="The MIME type of the multi-media element, if available." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Width" Type="Edm.Int32" dr:Description="The width of the full-size video in pixels, if available." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="Height" Type="Edm.Int32" dr:Description="The height of the full-size video in pixels, if available." dr:Queryable="false" dr:Returned="true" />
+        <Property Name="FileSize" Type="Edm.Int64" dr:Description="The size, in bytes, of the full-size video file, if available." dr:Queryable="false" dr:Returned="true" />
+      </ComplexType>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
