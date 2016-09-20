@@ -71,8 +71,8 @@ namespace QueryImagesBing
  
             //Azure Bing Marketplace account key (Replace with user key as needed)
             var accountKey =
-                "ZAdrCA5ePnFhop/B5qhOxTDEwJ106mrxq6Sx4yJ/QBI"; //Dr. Mahoors
-              //  "iisMD4XczRIebB8lTU+ZqDwkYcV6BM/HRH4OFbLFlxk"; //hojjat
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; 
+             
 
 
             bingContainer.Credentials = new NetworkCredential(accountKey, accountKey);
